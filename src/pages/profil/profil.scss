@@ -1,0 +1,146 @@
+//Desktop
+@media (min-width: 769px) {
+  #content {
+    padding-bottom: 1rem;
+  }
+  #profile-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    .profile-pic {
+      margin: 50px;
+      overflow: hidden;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      border-radius: 50%;
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+      align-self: center;
+    }
+
+    .identity {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+
+      .user-info {
+        display: flex;
+        flex-direction: column;
+      }
+      .name {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        max-width: min-content;
+        line-height: 1px;
+      }
+    }
+
+    .availabilities {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 0;
+      text-align: center;
+    }
+
+    .needs {
+      align-self: center;
+    }
+
+    .profile-btn {
+      display: flex;
+      flex-direction: column;
+      align-self: center;
+      text-align: center;
+      width: 5rem;
+
+      svg {
+        cursor: pointer;
+        color: #e31766;
+      }
+    }
+  }
+
+  .profile-description {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    margin: 1.5rem 3rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+// @media (min-width: 801px) and (max-width: 1100px) {
+// }
+
+// Mobile
+@media (max-width: 1100px) {
+  #content {
+    padding: 8px;
+    margin: 8px;
+
+    #profile-info {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 16px;
+      row-gap: 1rem;
+      font-size: 16px;
+
+      .profile-pic {
+        width: 140px;
+        height: 140px;
+        border-radius: 100%;
+      }
+    }
+
+    .availabilities {
+      // display: flex;
+      flex-direction: column;
+      text-align: center;
+      width: 100%;
+    }
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .name {
+      line-height: 8px;
+    }
+
+    .profile-btn {
+      zoom: 1.5;
+
+      svg {
+        cursor: pointer;
+        color: #e31766;
+      }
+      p {
+        display: none;
+      }
+    }
+
+    .profile-description {
+      margin: 1rem;
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      background-color: #fff;
+      border-radius: 0.5rem;
+    }
+  }
+}

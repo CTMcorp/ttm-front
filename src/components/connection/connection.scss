@@ -1,0 +1,48 @@
+
+#formContainer {
+
+  #connectionForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    padding: 3rem 0;
+
+    #checkbox {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .checkbox {
+      height: 1.2rem;
+    }
+  }
+}
+
+@media (min-width: 530px) {
+  #formContainer {
+    #connectionForm {
+
+      .text {
+        width: 100%;
+      }
+
+      #checkbox {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 1030px) {
+  #formContainer {
+    #connectionForm {
+      .text {
+        width: 70%;
+      }
+    }
+  }
+
+}

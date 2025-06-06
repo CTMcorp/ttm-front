@@ -1,0 +1,24 @@
+.inputForm {
+  min-width: 50%;
+  display: flex;
+  gap: 0.7rem;
+  flex-direction: column;
+  align-items: center;
+
+  input {
+    padding: 0.7rem;
+    width: 100%;
+    border-radius: 1rem;
+    border: solid #71C920;
+    background-color: transparent;
+  }
+}
+
+@media (min-width: 530px) {
+  #formContainer {
+    .inputForm input {
+      width: 50%;
+
+    }
+  }
+}
