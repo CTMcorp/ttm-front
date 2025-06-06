@@ -2,10 +2,25 @@ import "./profil.scss";
 import profilPhoto from "../../assets/profilPic.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { useContext } from "react";
+import { AuthContext } from "../../config/AuthContext";
+import UserService from "../../services/userService";
 
 const Profil = () => {
-  const handleClick = () => {
-    alert("profil supprimé");
+  const { isLogged, loginContext } = useContext(AuthContext);
+  const { getUserById } = UserService();
+
+  const handleClick = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await getUserById();
+      if (response && response.data) {
+        loginContext();
+        console.log(response);
+      }
+    } catch (error) {
+      console.log("oups", error);
+    }
   };
 
   return (
@@ -20,6 +35,7 @@ const Profil = () => {
           <div className="identity">
             <div className="user-info">
               <div className="name">
+                <button onClick={handleClick}></button>
                 <p>Prénom </p>
                 <p> Nom</p>
               </div>
@@ -34,7 +50,7 @@ const Profil = () => {
             <p>Types de réseaux / besoins</p>
           </div>
           <div className="profile-btn">
-            <FontAwesomeIcon icon={faTrashCan} onClick={handleClick} />
+            <FontAwesomeIcon icon={faTrashCan} />
             <p>Supprimer mon profil</p>
           </div>
         </div>

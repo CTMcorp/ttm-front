@@ -29,7 +29,11 @@ const UserService = () => {
     return _get("/ttm/allTypes");
   };
 
-  return { register, login, allTypes };
+  const getUserById = () => {
+    return _get("/users/user");
+  };
+
+  return { register, login, allTypes, getUserById };
 };
 
 export default UserService;
