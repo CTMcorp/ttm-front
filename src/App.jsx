@@ -7,6 +7,7 @@ import Register from "./components/connection/Register.jsx";
 import { AuthProvider } from "./config/AuthContext.jsx";
 import Profil from "./pages/profil/Profil.jsx";
 import WebSocketComponent from "./pages/message/WebSocketComponent.jsx";
+import FilDesProfils from "./pages/profil/FilDesProfils.jsx";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
             <Route path="/ttm/me/profil" element={<Profil />} />
+            <Route path="/ttm/me/filProfils" element={<FilDesProfils />} />
             <Route path="/ttm/me/messagerie" element={<WebSocketComponent />} />
           </Route>
         </Routes>

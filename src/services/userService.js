@@ -24,6 +24,8 @@ const UserService = () => {
   };
 
   return { register, login, allTypes, getUserById };
+
+
 };
 
 export default UserService;
