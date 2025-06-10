@@ -10,15 +10,26 @@ const client = axios.create({
 
 client.interceptors.request.use(
   (config) => {
-    let token;
+    const token = sessionStorage.getItem("accessToken");
     if (token && config.url !== "/auth/register") {
-      token = sessionStorage.getItem("accessToken");
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
   (error) => {
     console.log(error);
+    return Promise.reject(error);
+  }
+);
+
+client.interceptors.response.use(
+  (response) => {
+    if (response.data?.accessToken) {
+      sessionStorage.setItem("accessToken", response.data.accessToken);
+    }
+    return response;
+  },
+  (error) => {
     return Promise.reject(error);
   }
 );

@@ -1,14 +1,4 @@
-import client, { _get, _post } from "../config/axiosConfig.js";
-
-client.interceptors.response.use(
-  (response) => {
-    sessionStorage.setItem("accessToken", response.data.accessToken);
-    return response;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+import { _get, _post } from "../config/axiosConfig.js";
 
 const UserService = () => {
   const register = (firstname, lastname, email, password, role) => {

@@ -2,26 +2,30 @@ import "./profil.scss";
 import profilPhoto from "../../assets/profilPic.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../config/AuthContext";
 import UserService from "../../services/userService";
 
 const Profil = () => {
-  const { isLogged, loginContext } = useContext(AuthContext);
+  const { loginContext } = useContext(AuthContext);
   const { getUserById } = UserService();
+  const [user, setUser] = useState(null);
 
-  const handleClick = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await getUserById();
-      if (response && response.data) {
-        loginContext();
-        console.log(response);
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await getUserById();
+        if (response && response.data) {
+          setUser(response.data);
+          loginContext();
+          console.log(response.data);
+        }
+      } catch (error) {
+        console.log("oups", error);
       }
-    } catch (error) {
-      console.log("oups", error);
-    }
-  };
+    };
+    fetchUser();
+  }, [getUserById, loginContext]);
 
   return (
     <>
@@ -35,9 +39,8 @@ const Profil = () => {
           <div className="identity">
             <div className="user-info">
               <div className="name">
-                <button onClick={handleClick}></button>
-                <p>Prénom </p>
-                <p> Nom</p>
+                <p>{user?.firstname} </p>
+                <p>{user?.lastname}</p>
               </div>
               <p>Métier</p>
             </div>
@@ -48,6 +51,11 @@ const Profil = () => {
           </div>
           <div className="needs">
             <p>Types de réseaux / besoins</p>
+            <p>
+              {user?.secteursActivites.map((element) => {
+                element;
+              })}
+            </p>
           </div>
           <div className="profile-btn">
             <FontAwesomeIcon icon={faTrashCan} />
@@ -56,50 +64,7 @@ const Profil = () => {
         </div>
         <div className="profile-description">
           <h2>DESCRIPTION DU PROJET ET DES BESOINS</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-            ea commodo consequat. Duis aute irure dolor in reprehenderit in
-            voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit
-            amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-            ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum. Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum. Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum. Lorem ipsum dolor sit amet, consectetur
-            adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo
-            consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-            cupidatat non proident, sunt in culpa qui officia deserunt mollit
-            anim id est laborum.
-          </p>
+          <p>{user?.description}</p>
         </div>
       </div>
     </>
