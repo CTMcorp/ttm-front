@@ -1,7 +1,7 @@
 import "./profil.scss";
 import profilPhoto from "../../assets/profilPic.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../config/AuthContext";
 import UserService from "../../services/userService";
@@ -25,7 +25,8 @@ const Profil = () => {
       }
     };
     fetchUser();
-  }, [getUserById, loginContext]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -37,33 +38,40 @@ const Profil = () => {
             src={profilPhoto}
           />
           <div className="identity">
-            <div className="user-info">
-              <div className="name">
-                <p>{user?.firstname} </p>
-                <p>{user?.lastname}</p>
-              </div>
-              <p>Métier</p>
-            </div>
-          </div>
-          <div className="availabilities">
-            <h3>Disponibilités :</h3>
-            <p>lundi, mardi, mercredi, jeudi</p>
-          </div>
-          <div className="needs">
-            <p>Types de réseaux / besoins</p>
-            <p>
-              {user?.secteursActivites.map((element) => {
-                element;
-              })}
-            </p>
+            <p>{user?.firstname} </p>
+            <p>{user?.lastname}</p>
           </div>
           <div className="profile-btn">
+            <FontAwesomeIcon icon={faPenToSquare} />
+            <p>Modifier</p>
             <FontAwesomeIcon icon={faTrashCan} />
-            <p>Supprimer mon profil</p>
+            <p>Supprimer</p>
+          </div>
+        </div>
+        <div className="needs">
+          <div id="secteurs">
+            <p>Secteurs d&apos;activités</p>
+            <ul>
+              {user?.secteursActivites.map((element, index) => (
+                <li key={index}>
+                  {element.toLowerCase().replaceAll("_", " ")}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div id="types">
+            <p>Types d&apos;accompagnements nécessaires</p>
+            <ul>
+              {user?.typesAccompagnements.map((element, index) => (
+                <li key={index}>
+                  {element.toLowerCase().replaceAll("_", " ")}
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
         <div className="profile-description">
-          <h2>DESCRIPTION DU PROJET ET DES BESOINS</h2>
+          <h2>Description du projet et des besoins</h2>
           <p>{user?.description}</p>
         </div>
       </div>
