@@ -30,7 +30,7 @@ const FilDesProfils = () => {
       <div className="card-container">
         {parrains.map((parrain, index) => (
           <div className="profile-card" key={index}>
-            <div className="card-title" >
+            <div className="card-title">
               <div className="pic">PICTURE</div>
               <div className="identity">
                 {parrain?.lastname} {parrain?.firstname}

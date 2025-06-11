@@ -1,31 +1,32 @@
 h1{
     text-align: center;
-    justify-content: center;
 }
+
 .card-container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
     flex-wrap: wrap;
     
 
     .profile-card {
-        display: inherit;
-    margin: 16px;
+    display: inherit;
+    margin: 1rem;
     background-color: #fff;
     border-radius: 3px;
-    width: 370px;
-    height: 60px;
+    width: 16rem;
+    height: 5rem;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 10px;
+    padding: 0.5rem;
     border: 3px solid #72c9207a;
 }
 
     .card-title{
         justify-content: space-around;
-        margin: 16px;
+        padding: 0.5rem;
         border-radius: 3px;
+        line-height:2rem;
     }
 }
