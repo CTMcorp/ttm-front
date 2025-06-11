@@ -7,26 +7,26 @@ import { AuthContext } from "../../config/AuthContext";
 import UserService from "../../services/userService";
 
 const Profil = () => {
-  const { loginContext } = useContext(AuthContext);
-  const { getUserById } = UserService();
-  const [user, setUser] = useState(null);
+  const { user } = useContext(AuthContext);
+  // const { getUserById } = UserService();
+  // const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await getUserById();
-        if (response && response.data) {
-          setUser(response.data);
-          loginContext();
-          console.log(response.data);
-        }
-      } catch (error) {
-        console.log("oups", error);
-      }
-    };
-    fetchUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     try {
+  //       const response = await getUserById();
+  //       if (response && response.data) {
+  //         setUser(response.data);
+  //         loginContext();
+  //         console.log(response.data);
+  //       }
+  //     } catch (error) {
+  //       console.log("oups", error);
+  //     }
+  //   };
+  //   fetchUser();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <>

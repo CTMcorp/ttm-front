@@ -22,6 +22,7 @@ const UserService = () => {
   const getUserById = () => {
     return _get("/users/user");
   };
+  
 
   return { register, login, allTypes, getUserById };
 

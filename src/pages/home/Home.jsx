@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../config/AuthContext.jsx";
 
 const Home = () => {
-  const { isLogged } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -14,7 +14,7 @@ const Home = () => {
 
   return (
     <div id="container">
-      {!isLogged ? (
+      {!user ? (
         <Button onClick={handleClick} text="Se connecter"></Button>
       ) : (
         <div>

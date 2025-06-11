@@ -16,7 +16,7 @@ import Button from "../../atoms/button/Button.jsx";
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const hideMenu = () => setIsOpen(false);
-  const { isLogged, logout } = useContext(AuthContext);
+  const { user, logout } = useContext(AuthContext);
 
   return (
     <div className="navBarContainer">
@@ -37,9 +37,11 @@ const NavBar = () => {
           <button id="closeMenu" onClick={hideMenu}>
             <FontAwesomeIcon icon={faXmark} />
           </button>
-          <Link to="/ttm/me/filProfils" className="navBarLink">
-            Découvrir les profils
-          </Link>
+          {user?.role === "[PORTEUR]" || user?.role === "[ROLE_Administrateur]" ? (
+            <Link to="/ttm/me/filProfils" className="navBarLink">
+              Découvrir les profils
+            </Link>
+          ) : null}
           <Link to="/ttm/me/messagerie" className="navBarLink">
             Messagerie
           </Link>
@@ -59,7 +61,7 @@ const NavBar = () => {
         <Link id="notification" to={""} className="navBarLink">
           <FontAwesomeIcon icon={faBell} />
         </Link>
-        {isLogged ? (
+        {user ? (
           <Button
             text={<FontAwesomeIcon icon={faRightFromBracket} />}
             onClick={logout}
