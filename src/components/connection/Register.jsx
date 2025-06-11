@@ -42,6 +42,9 @@ const Register = () => {
 
   return (
     <div id="formContainer">
+      <h2 id="register-title">
+        Enregister-vous pour profiter de notre plateforme !
+      </h2>
       {/*// TODO rajouter l'action action="/newPage"*/}
       <form method="post" onSubmit={handleRegister} id="connectionForm">
         <Input
