@@ -19,14 +19,15 @@ const UserService = () => {
     return _get("/ttm/allTypes");
   };
 
-  const getUserById = () => {
-    return _get("/users/user");
+  const getUserById = (id) => {
+    let route = "/user";
+    if (id) {
+      route = "/" + id;
+    }
+    return _get("/users" + route);
   };
-  
 
   return { register, login, allTypes, getUserById };
-
-
 };
 
 export default UserService;

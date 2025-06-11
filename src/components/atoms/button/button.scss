@@ -6,4 +6,8 @@
   border-color: #d2105c;
   border-radius: 2rem;
   cursor: pointer;
+
+  .buttons:hover {
+    background-color: red;
+  }
 }

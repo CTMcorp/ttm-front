@@ -4,18 +4,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import UserService from "../../services/userService";
+import { useParams } from "react-router";
 
+// eslint-disable-next-line react/prop-types
 const Profil = () => {
+  let { id } = useParams();
   const { getUserById } = UserService();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await getUserById();
+        const response = await getUserById(id);
         if (response && response.data) {
           setUser(response.data);
-          console.log(response.data);
         }
       } catch (error) {
         console.log("oups", error);

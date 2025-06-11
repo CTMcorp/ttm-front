@@ -5,11 +5,11 @@ import "./filDesProfils.scss";
 import { Link } from "react-router";
 
 const FilDesProfils = () => {
-  const { user } = useContext(AuthContext);
+  const { user: currentUser } = useContext(AuthContext);
   const { getAllParrains, getAllUsers } = profileService();
   const [parrains, setParrains] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
-  console.log("user: ", user);
+
   const fetchParrain = useCallback(async () => {
     try {
       const response = await getAllParrains();
@@ -43,7 +43,7 @@ const FilDesProfils = () => {
   return (
     <>
       <h1>Partez à la découverte des profils !</h1>
-      {user?.role === "[ROLE_PORTEUR]" ? (
+      {currentUser?.role === "[ROLE_PORTEUR]" ? (
         <>
           <div className="card-container">
             {parrains.map((parrain, index) => (
@@ -54,11 +54,17 @@ const FilDesProfils = () => {
                     {parrain?.lastname} {parrain?.firstname}
                   </div>
                 </div>
+                <Link
+                  className="voir-profil"
+                  to={`/ttm/me/profil/${parrain?.userId}`}
+                >
+                  Voir le profil
+                </Link>
               </div>
             ))}
           </div>
         </>
-      ) : user?.role === "[ROLE_ADMIN]" ? (
+      ) : currentUser?.role === "[ROLE_ADMIN]" ? (
         <div className="card-container">
           {allUsers.map((oneUser, index) => (
             <div className="profile-card" key={index}>
@@ -68,7 +74,10 @@ const FilDesProfils = () => {
                   {oneUser?.lastname} {oneUser?.firstname}
                 </div>
               </div>
-              <Link className="voir-profil" to="/">
+              <Link
+                className="voir-profil"
+                to={`/ttm/me/profil/${oneUser?.userId}`}
+              >
                 Voir le profil
               </Link>
             </div>

@@ -10,6 +10,9 @@ import WebSocketComponent from "./pages/message/WebSocketComponent.jsx";
 import FilDesProfils from "./pages/profil/FilDesProfils.jsx";
 
 function App() {
+
+
+
   return (
     <BrowserRouter>
       {/* <ChildComponent /> */}
@@ -20,6 +23,7 @@ function App() {
             <Route path="/auth/login" element={<Login />} />
             <Route path="/auth/register" element={<Register />} />
             <Route path="/ttm/me/profil" element={<Profil />} />
+            <Route path="/ttm/me/profil/:id" element={<Profil />} />
             <Route path="/ttm/me/filProfils" element={<FilDesProfils />} />
             <Route path="/ttm/me/messagerie" element={<WebSocketComponent />} />
           </Route>
