@@ -2,32 +2,28 @@ import "./profil.scss";
 import profilPhoto from "../../assets/profilPic.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../config/AuthContext";
+import { useEffect, useState } from "react";
 import UserService from "../../services/userService";
 
 const Profil = () => {
-  const { user } = useContext(AuthContext);
-  // const { getUserById } = UserService();
-  // const [user, setUser] = useState(null);
+  const { getUserById } = UserService();
+  const [user, setUser] = useState(null);
 
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     try {
-  //       const response = await getUserById();
-  //       if (response && response.data) {
-  //         setUser(response.data);
-  //         loginContext();
-  //         console.log(response.data);
-  //       }
-  //     } catch (error) {
-  //       console.log("oups", error);
-  //     }
-  //   };
-  //   fetchUser();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await getUserById();
+        if (response && response.data) {
+          setUser(response.data);
+          console.log(response.data);
+        }
+      } catch (error) {
+        console.log("oups", error);
+      }
+    };
+    fetchUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <div id="content">

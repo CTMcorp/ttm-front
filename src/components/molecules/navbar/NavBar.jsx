@@ -37,7 +37,7 @@ const NavBar = () => {
           <button id="closeMenu" onClick={hideMenu}>
             <FontAwesomeIcon icon={faXmark} />
           </button>
-          {user?.role === "[PORTEUR]" || user?.role === "[ROLE_Administrateur]" ? (
+          {user?.role === "[ROLE_PORTEUR]" || user?.role === "[ROLE_ADMIN]" ? (
             <Link to="/ttm/me/filProfils" className="navBarLink">
               Découvrir les profils
             </Link>

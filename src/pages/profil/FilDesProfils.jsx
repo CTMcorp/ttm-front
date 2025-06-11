@@ -1,7 +1,8 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../config/AuthContext";
 import profileService from "../../services/profileService";
 import "./filDesProfils.scss";
+import { Link } from "react-router";
 
 const FilDesProfils = () => {
   const { user } = useContext(AuthContext);
@@ -9,7 +10,6 @@ const FilDesProfils = () => {
   const [parrains, setParrains] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   console.log("user: ", user);
-  
   const fetchParrain = useCallback(async () => {
     try {
       const response = await getAllParrains();
@@ -20,7 +20,7 @@ const FilDesProfils = () => {
       error("not found", error);
     }
   }, [setParrains, getAllParrains]);
-  
+
   const fetchAllUsers = useCallback(async () => {
     try {
       const response = await getAllUsers();
@@ -42,9 +42,9 @@ const FilDesProfils = () => {
 
   return (
     <>
+      <h1>Partez à la découverte des profils !</h1>
       {user?.role === "[ROLE_PORTEUR]" ? (
         <>
-          <h1>Partez à la découverte des profils !</h1>
           <div className="card-container">
             {parrains.map((parrain, index) => (
               <div className="profile-card" key={index}>
@@ -58,7 +58,7 @@ const FilDesProfils = () => {
             ))}
           </div>
         </>
-      ) : user?.role === "[ROLE_Administrateur]" ? (
+      ) : user?.role === "[ROLE_ADMIN]" ? (
         <div className="card-container">
           {allUsers.map((oneUser, index) => (
             <div className="profile-card" key={index}>
@@ -68,6 +68,9 @@ const FilDesProfils = () => {
                   {oneUser?.lastname} {oneUser?.firstname}
                 </div>
               </div>
+              <Link className="voir-profil" to="/">
+                Voir le profil
+              </Link>
             </div>
           ))}
         </div>

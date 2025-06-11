@@ -7,7 +7,6 @@ export const AuthContext = createContext(undefined);
 
 // eslint-disable-next-line react/prop-types
 export const AuthProvider = ({ children }) => {
-  // const [isLogged, setIsLogged] = useState(false);
   const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
@@ -16,7 +15,6 @@ export const AuthProvider = ({ children }) => {
     const userData = getUserFromToken(token);
     if (userData) {
       setUser(userData);
-      // setIsLogged(true);
     }
   }, []);
 
@@ -26,18 +24,14 @@ export const AuthProvider = ({ children }) => {
     setUser(userData);
   };
 
-  // const loginContext = () => {
-  //   setIsLogged(true);
-  // };
   const logout = () => {
     sessionStorage.removeItem("accessToken");
-    // setIsLogged(false);
     navigate("auth/login");
   };
 
   return (
     <AuthContext.Provider
-      value={{ /*isLogged, */ user, login, /* loginContext,*/ logout }}
+      value={{ user, login, logout }}
     >
       {children}
     </AuthContext.Provider>
