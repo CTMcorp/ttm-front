@@ -3,7 +3,7 @@ import { useState } from "react";
 import("./connection.scss");
 import Input from "../atoms/input/Input.jsx";
 import Button from "../atoms/button/Button.jsx";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import userService from "../../services/userService.js";
 
 const Register = () => {
@@ -113,7 +113,13 @@ const Register = () => {
             useValueAsLabel={true}
           />
         </div>
-        <p>{message}</p>
+        {message && <p>{message}</p>}
+        <Link
+          to="/auth/login"
+          style={{ textDecoration: "none", color: "#E31766" }}
+        >
+          Cliquez ici pour vous connecter si vous avez déjà votre compte !
+        </Link>
         <Button text="S'enregistrer" type="submit"></Button>
       </form>
     </div>

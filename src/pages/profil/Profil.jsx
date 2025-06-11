@@ -1,10 +1,11 @@
 import "./profil.scss";
 import profilPhoto from "../../assets/profilPic.jpg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import UserService from "../../services/userService";
 import { useParams } from "react-router";
 import { useContext, useEffect, useState } from "react";
+import UpdateUser from "../../components/molecules/updateUser/UpdateUser";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../../config/AuthContext";
 
@@ -12,6 +13,7 @@ import { AuthContext } from "../../config/AuthContext";
 const Profil = () => {
   let { id } = useParams();
   const { deleteUser, getUserById } = UserService();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [user, setUser] = useState(null);
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -43,6 +45,14 @@ const Profil = () => {
       console.log("oups", error);
     }
   };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
       <div id="content">
@@ -58,7 +68,7 @@ const Profil = () => {
             <p>{user?.email}</p>
           </div>
           <div className="profile-btn">
-            <FontAwesomeIcon icon={faPenToSquare} />
+            <UpdateUser isOpen={isModalOpen} onClose={handleCloseModal} />
             <p>Modifier mes informations personnelles</p>
             <FontAwesomeIcon icon={faTrashCan} onClick={handleDeleteUser} />
             <p>Supprimer mon compte</p>
