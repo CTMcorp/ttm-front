@@ -20,7 +20,11 @@ const UserService = () => {
   };
 
   const getUserById = (id) => {
-    return _get(`/users/${id}`);
+    let route = "/user";
+    if (id) {
+      route = "/" + id;
+    }
+    return _get("/users" + route);
   };
 
   const updateUser = (id, data) => {

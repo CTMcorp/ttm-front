@@ -15,12 +15,13 @@ h1{
     background-color: #fff;
     border-radius: 3px;
     width: 16rem;
-    height: 5rem;
+    height: 6rem;
     align-items: center;
     justify-content: center;
     text-align: center;
     padding: 0.5rem;
     border: 3px solid #72c9207a;
+    flex-direction: column;
 }
 
     .card-title{
@@ -28,5 +29,13 @@ h1{
         padding: 0.5rem;
         border-radius: 3px;
         line-height:2rem;
+    }
+
+    .voir-profil{
+        color: black;
+    }
+
+    .voir-profil:hover{
+        color: violet;
     }
 }
