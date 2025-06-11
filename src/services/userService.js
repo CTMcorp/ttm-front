@@ -1,4 +1,4 @@
-import { _get, _post } from "../config/axiosConfig.js";
+import { _delete, _get, _post, _put } from "../config/axiosConfig.js";
 
 const UserService = () => {
   const register = (firstname, lastname, email, password, role) => {
@@ -15,8 +15,8 @@ const UserService = () => {
     return _post("/auth/login", { email, password });
   };
 
-  const allTypes = () => {
-    return _get("/ttm/allTypes");
+  const getUserAuthenticated = () => {
+    return _get("/users/user");
   };
 
   const getUserById = (id) => {
@@ -27,7 +27,22 @@ const UserService = () => {
     return _get("/users" + route);
   };
 
-  return { register, login, allTypes, getUserById };
+  const updateUser = (id, data) => {
+    return _put(`/users/${id}`, { data });
+  };
+
+  const deleteUser = (id) => {
+    return _delete(`/users/${id}`);
+  };
+
+  return {
+    register,
+    login,
+    getUserAuthenticated,
+    getUserById,
+    updateUser,
+    deleteUser,
+  };
 };
 
 export default UserService;

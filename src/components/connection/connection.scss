@@ -1,5 +1,8 @@
-
 #formContainer {
+  #register-title {
+    text-align: center;
+    padding-top: 2rem;
+  }
 
   #connectionForm {
     display: flex;
@@ -22,7 +25,6 @@
 @media (min-width: 530px) {
   #formContainer {
     #connectionForm {
-
       .text {
         width: 100%;
       }
@@ -44,5 +46,4 @@
       }
     }
   }
-
 }

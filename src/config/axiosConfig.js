@@ -36,12 +36,12 @@ client.interceptors.response.use(
 
 export default client;
 
-const _get = async (url, config = {}) => {
-  return await client.get(url, config);
+const _get = async (url, data = {}, config = {}) => {
+  return await client.get(url, data, config);
 };
 
-const _delete = async (url, config = {}) => {
-  return await client.delete(url, config);
+const _delete = async (url, data = {}, config = {}) => {
+  return await client.delete(url, data, config);
 };
 
 const _post = async (url, data = {}, config = {}) => {
