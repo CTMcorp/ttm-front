@@ -5,14 +5,13 @@ import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import UserService from "../../services/userService";
 import { useParams } from "react-router";
 import { useContext, useEffect, useState } from "react";
-import UserService from "../../services/userService";
 import { useNavigate } from "react-router";
 import { AuthContext } from "../../config/AuthContext";
 
 // eslint-disable-next-line react/prop-types
 const Profil = () => {
   let { id } = useParams();
-  const { getUserAuthenticated, deleteUser, getUserById } = UserService();
+  const { deleteUser, getUserById } = UserService();
   const [user, setUser] = useState(null);
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -20,10 +19,9 @@ const Profil = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await getUserAuthenticated();
+        const response = await getUserById(id);
         if (response && response.data) {
           setUser(response.data);
-          console.log(response.data);
         }
       } catch (error) {
         console.log("oups", error);
@@ -45,21 +43,6 @@ const Profil = () => {
       console.log("oups", error);
     }
   };
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await getUserById(id);
-        if (response && response.data) {
-          setUser(response.data);
-        }
-      } catch (error) {
-        console.log("oups", error);
-      }
-    };
-    fetchUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   return (
     <>
       <div id="content">
