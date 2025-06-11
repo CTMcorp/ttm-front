@@ -37,7 +37,7 @@ const NavBar = () => {
           <button id="closeMenu" onClick={hideMenu}>
             <FontAwesomeIcon icon={faXmark} />
           </button>
-          <Link to="" className="navBarLink">
+          <Link to="/ttm/me/filProfils" className="navBarLink">
             Découvrir les profils
           </Link>
           <Link to="/ttm/me/messagerie" className="navBarLink">
