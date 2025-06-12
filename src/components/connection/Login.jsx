@@ -12,15 +12,15 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const { loginContext } = useContext(AuthContext);
-  const { login } = userService();
+  const { login } = useContext(AuthContext);
+  const { login: loginRequest } = userService();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await login(email, password);
+      const response = await loginRequest(email, password);
       if (response && response.data) {
-        loginContext();
+        login(response.data["accessToken"]);
         navigate("/");
       }
     } catch (error) {
@@ -49,12 +49,12 @@ const Login = () => {
           placeholder="Entrer votre mot de passe"
           useValueAsLabel={false}
         />
-        <Link
+        {/* <Link
           to="/auth/register"
           style={{ textDecoration: "none", color: "#E31766" }}
         >
           Cliquez ici si vous n&apos;avez pas encore de compte !
-        </Link>
+        </Link> */}
         <p>{message}</p>
         <Button text="Se connecter" type="submit" onClick={() => {}}></Button>
       </form>
