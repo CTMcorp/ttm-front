@@ -41,7 +41,7 @@ const Register = () => {
       );
       console.log(response.data);
       if (response && response.data) {
-        navigate("/auth/login");
+        navigate("/admin/dashboard");
       }
     } catch (error) {
       setMessage("Registration failed.");
@@ -53,9 +53,7 @@ const Register = () => {
     <>
       {isAdmin ? (
         <div id="formContainer">
-          <h2 id="register-title">
-            Créez un nouvel utilisateur!
-          </h2>
+          <h2 id="register-title">Créez un nouvel utilisateur!</h2>
           {/*// TODO rajouter l'action action="/newPage"*/}
           <form method="post" onSubmit={handleRegister} id="connectionForm">
             <Input
