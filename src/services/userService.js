@@ -28,7 +28,7 @@ const UserService = () => {
   };
 
   const updateUser = (id, data) => {
-    return _put(`/users/${id}`, { data });
+    return _put(`/users/${id}`, data);
   };
 
   const deleteUser = (id) => {

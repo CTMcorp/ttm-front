@@ -72,6 +72,7 @@
 @media (min-width: 830px) {
   #content {
     #profile-info {
+      grid-template-columns: 1fr 2fr 1fr;
       .profile-btn {
         p {
           display: flex;
