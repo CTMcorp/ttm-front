@@ -46,7 +46,7 @@ const NavBar = () => {
           <Link to="" className="navBarLink">
             Mes matchs
           </Link>
-          <Link to="" className="navBarLink">
+          <Link to="/ttm/me/documents" className="navBarLink">
             Boîte à outils
           </Link>
           <Link to="" className="navBarLink">
