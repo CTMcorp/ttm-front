@@ -51,9 +51,15 @@ const NavBar = () => {
           <Link to="" className="navBarLink">
             Boîte à outils
           </Link>
-          <Link to="" className="navBarLink">
-            Mes rendez-vous
-          </Link>
+          {user?.role !== "[ROLE_ADMIN]" ? (
+            <Link to="" className="navBarLink">
+              Mes rendez-vous
+            </Link>
+          ) : (
+            <Link to="/admin/dashboard" className="navBarLink">
+              Espace administrateur
+            </Link>
+          )}
         </div>
         <Link to={"/ttm/me/profil"} className="navBarLink">
           <FontAwesomeIcon icon={faUser} />

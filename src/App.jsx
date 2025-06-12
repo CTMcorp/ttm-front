@@ -8,6 +8,7 @@ import { AuthProvider } from "./config/AuthContext.jsx";
 import Profil from "./pages/profil/Profil.jsx";
 import WebSocketComponent from "./pages/message/WebSocketComponent.jsx";
 import FilDesProfils from "./pages/profil/FilDesProfils.jsx";
+import Dashboard from "./pages/home/dashboard/Dashboard.jsx";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="/ttm/me/profil" element={<Profil />} />
             <Route path="/ttm/me/profil/:id" element={<Profil />} />
             <Route path="/ttm/me/filProfils" element={<FilDesProfils />} />
+            <Route path="/admin/dashboard" element={<Dashboard />} />
             <Route path="/ttm/me/messagerie" element={<WebSocketComponent />} />
           </Route>
         </Routes>
