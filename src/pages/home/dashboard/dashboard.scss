@@ -1,0 +1,63 @@
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin: 1rem;
+  padding: 1rem;
+
+  div {
+    width: 10rem;
+    height: 15rem;
+    border: 3px solid #72c9207a;
+    border-radius: 3px;
+    background-color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 16px;
+
+    .admin-btn {
+    //   margin: 2rem 0;
+      padding: 0.5rem 0.5rem;
+      color: white;
+      background-color: #e31766;
+      border-color: #d2105c;
+      border-radius: 1.5rem;
+      cursor: pointer;
+    }
+
+    .admin-btn:hover{
+        background-color: #e31765cc;
+    }
+  }
+
+  // .import-doc{
+  //     width: 10rem;
+  //     height: 15rem;
+  //     border: 3px solid #72c9207a;
+  //     border-radius: 3px;
+  //     background-color: #fff;
+  //     text-align: center;
+  //     display: flex;
+  //     flex-direction: column;
+  //     justify-content: space-evenly;
+  //     padding: 16px;
+
+  // }
+
+  // .meetings{
+  //     width: 10rem;
+  //     height: 15rem;
+  //     border: 3px solid #72c9207a;
+  //     border-radius: 3px;
+  //     background-color: #fff;
+  //     text-align: center;
+  //     display: flex;
+  //     flex-direction: column;
+  //     justify-content: space-evenly;
+  //     padding: 16px;
+
+  // }
+}

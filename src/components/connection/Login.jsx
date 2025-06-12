@@ -49,12 +49,12 @@ const Login = () => {
           placeholder="Entrer votre mot de passe"
           useValueAsLabel={false}
         />
-        <Link
+        {/* <Link
           to="/auth/register"
           style={{ textDecoration: "none", color: "#E31766" }}
         >
           Cliquez ici si vous n&apos;avez pas encore de compte !
-        </Link>
+        </Link> */}
         <p>{message}</p>
         <Button text="Se connecter" type="submit" onClick={() => {}}></Button>
       </form>
