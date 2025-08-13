@@ -1,84 +1,118 @@
-import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router";
-// import { _get } from "../../config/axiosConfig";
+import { useEffect, useRef, useState } from "react";
 
 const WebSocketComponent = () => {
   const [message, setMessage] = useState("");
+  const [receiver, setReceiver] = useState("");
   const [messages, setMessages] = useState([]);
-  const [socket, setSocket] = useState(null);
-  //   const navigate = useNavigate();
-
-  //   useEffect(() => {
-  //     const checkAuth = async () => {
-  //       try {
-  //         await _get("/ttm/me/messagerie");
-  //       } catch (error) {
-  //         navigate("/auth/login");
-  //       }
-  //     };
-  //     checkAuth();
-  //   }, []);
+  const socketRef = useRef(null);
 
   useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8080/ws");
-    setSocket(ws);
+    const timeout = setTimeout(() => {
+      const token = sessionStorage.getItem("accessToken");
+      const ws = new WebSocket("ws://localhost:8080/ws");
 
-    ws.onmessage = (event) => {
-      const parsedMessage = JSON.parse(event.data);
-      setMessages((prevMessages) => [...prevMessages, parsedMessage]);
-    };
+      ws.onopen = async () => {
+        console.log("WebSocket connected");
 
-    return () => {
-      ws.close();
-    };
+        // Authentification avec le token JWT
+        ws.send(
+          JSON.stringify({
+            type: "AUTH",
+            token: token,
+          })
+        );
+
+        try {
+          const response = await fetch("http://localhost:8080/ttm/me", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (response.ok) {
+            const username = await response.text();
+            sessionStorage.setItem("username", username);
+          } else {
+            console.error("Échec de la récupération de l'utilisateur");
+          }
+        } catch (error) {
+          console.error(
+            "Erreur lors de la récupération de l'utilisateur :",
+            error
+          );
+        }
+      };
+
+      console.log(token);
+
+      ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        if (data.type === "Message") {
+          setMessages((prev) => [...prev, data]);
+        }
+      };
+
+      ws.onclose = () => {
+        console.log("WebSocket disconnected");
+      };
+
+      socketRef.current = ws;
+      return () => {
+        ws.close();
+        clearTimeout(timeout);
+      };
+    }, 1000);
   }, []);
 
   const sendMessage = () => {
-    if (message.trim() !== "" && socket) {
-      const messageObject = { content: message };
-      socket.send(JSON.stringify(messageObject));
+    const sender = sessionStorage.getItem("username");
+    console.log("Sender : ", sender);
+
+    if (
+      message &&
+      receiver &&
+      socketRef.current?.readyState === WebSocket.OPEN
+    ) {
+      socketRef.current.send(
+        JSON.stringify({
+          type: "Message",
+          sender,
+          receiver,
+          content: message,
+        })
+      );
       setMessage("");
     }
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      sendMessage();
-    }
-  };
-
   return (
-    <div className="flex flex-col h-screen bg-gray-100">
-      <h1 className="text-2xl font-bold bg-blue-800 text-gray-200 py-4 px-8 mb-4">
-        Messaging App
-      </h1>
-      <div className="flex-grow overflow-y-auto p-4">
-        <div className="space-y-2">
-          {messages.map((msg, index) => (
-            <div key={index} className="bg-white p-2 rounded shadow-sm">
-              {msg.content}
-            </div>
-          ))}
-        </div>
+    <div>
+      <h1>Messaging App</h1>
+
+      <div>
+        {messages.map((msg, index) => (
+          <div key={index}>
+            <strong>
+              {msg.sender} → {msg.receiver}:
+            </strong>{" "}
+            {msg.content}
+          </div>
+        ))}
       </div>
 
-      <div className="p-4 bg-white border-t">
-        <input
-          type="text"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={handleKeyDown}
-          className="w-full p-2 border rounded"
-          placeholder="Type your message..."
-        />
-        <button
-          onClick={sendMessage}
-          className="mt-2 bg-blue-600 text-white py-2 px-4 rounded"
-        >
-          Send
-        </button>
-      </div>
+      <input
+        type="text"
+        value={receiver}
+        onChange={(e) => setReceiver(e.target.value)}
+        placeholder="Receiver username"
+      />
+      <input
+        type="text"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+        placeholder="Type your message..."
+      />
+      <button onClick={sendMessage}>Send</button>
     </div>
   );
 };
