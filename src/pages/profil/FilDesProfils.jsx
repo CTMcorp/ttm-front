@@ -17,7 +17,7 @@ const FilDesProfils = () => {
         setParrains(response.data);
       }
     } catch (error) {
-      error("not found", error);
+      console.error("not found", error);
     }
   }, [setParrains, getAllParrains]);
 
@@ -28,7 +28,7 @@ const FilDesProfils = () => {
         setAllUsers(response.data);
       }
     } catch (error) {
-      error("not found ", error);
+      console.error("not found ", error);
     }
   }, [getAllUsers, setAllUsers]);
 

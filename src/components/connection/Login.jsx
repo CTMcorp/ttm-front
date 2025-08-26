@@ -1,7 +1,6 @@
 import "./connection.scss";
 import Button from "../atoms/button/Button.jsx";
 import Input from "../atoms/input/Input.jsx";
-import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import userService from "../../services/userService.js";
@@ -49,12 +48,6 @@ const Login = () => {
           placeholder="Entrer votre mot de passe"
           useValueAsLabel={false}
         />
-        {/* <Link
-          to="/auth/register"
-          style={{ textDecoration: "none", color: "#E31766" }}
-        >
-          Cliquez ici si vous n&apos;avez pas encore de compte !
-        </Link> */}
         <p>{message}</p>
         <Button text="Se connecter" type="submit" onClick={() => {}}></Button>
       </form>

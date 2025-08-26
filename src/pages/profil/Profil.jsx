@@ -86,7 +86,7 @@ const Profil = () => {
       </div>
       <div className="needs">
         <div id="secteurs">
-          <p>Secteurs d&apos;activités</p>
+          <p>Secteur d&apos;activité</p>
           <FontAwesomeIcon
             icon={faPenToSquare}
             onClick={() => setIsSecteursModalOpen(true)}
@@ -98,8 +98,12 @@ const Profil = () => {
             onUserUpdated={(updateUser) => setUser(updateUser)}
           />
           <ul>
-            {user?.secteursActivites.map((element, index) => (
-              <li key={index}>{element.toLowerCase().replaceAll("_", " ")}</li>
+            {user?.secteursActivites.map((secteur, index) => (
+              <li key={index}>
+                {typeof secteur === "string"
+                  ? secteur.toLowerCase().replaceAll("_", " ")
+                  : secteur.name?.toLowerCase().replaceAll("_", " ")}
+              </li>
             ))}
           </ul>
         </div>

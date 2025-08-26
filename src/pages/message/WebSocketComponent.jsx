@@ -46,9 +46,12 @@ const WebSocketComponent = () => {
       console.log(token);
 
       ws.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        if (data.type === "Message") {
+        try {
+          const data = JSON.parse(event.data);
+          console.log("Message reçu :", data);
           setMessages((prev) => [...prev, data]);
+        } catch (error) {
+          console.error("Erreur de parsing du message WebSocket :", error);
         }
       };
 

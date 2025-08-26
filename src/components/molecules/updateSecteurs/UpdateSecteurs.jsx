@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import SecteursTypesService from "../../../services/secteursTypesService";
@@ -14,6 +15,7 @@ import Button from "@mui/material/Button";
 const UpdateSecteurs = ({ isOpen, onClose, userData, onUserUpdated }) => {
   const { addSecteurToUser, deleteSecteurFromUser, getAllSecteurs } =
     SecteursTypesService();
+
   const [allSecteurs, setAllSecteurs] = useState([]);
   const [selectedSecteurs, setSelectedSecteurs] = useState([]);
 
@@ -24,40 +26,40 @@ const UpdateSecteurs = ({ isOpen, onClose, userData, onUserUpdated }) => {
         if (response?.data) {
           setAllSecteurs(response.data);
         }
+
         if (userData?.secteursActivites) {
-          setSelectedSecteurs(userData.secteursActivites);
+          setSelectedSecteurs(userData.secteursActivites.map((s) => s.name));
         } else {
           setSelectedSecteurs([]);
         }
       } catch (error) {
-        console.error(error);
+        console.error("Erreur lors du chargement des secteurs :", error);
       }
     };
+
     if (isOpen) {
       fetchAllSecteurs();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, userData]);
 
-  const handleToggle = (secteur) => {
-    setSelectedSecteurs((prev) => {
-      if (prev === null) {
-        [secteur];
-      } else {
-        [...prev, secteur];
-      }
-    });
+  const handleToggle = (secteurName) => {
+    setSelectedSecteurs(
+      (prev) =>
+        prev.includes(secteurName)
+          ? prev.filter((s) => s !== secteurName) // décocher
+          : [...prev, secteurName] // cocher
+    );
   };
 
   const handleSubmit = async () => {
-    const secteursActuels = userData?.secteursActivites || [];
+    const currentSecteurs =
+      userData?.secteursActivites.map((s) => s.name) || [];
 
     const addSecteurs = selectedSecteurs.filter(
-      (secteur) => !secteursActuels.includes(secteur)
+      (s) => !currentSecteurs.includes(s)
     );
-
-    const deleteSecteurs = secteursActuels.filter(
-      (secteur) => !selectedSecteurs.includes(secteur)
+    const deleteSecteurs = currentSecteurs.filter(
+      (s) => !selectedSecteurs.includes(s)
     );
 
     try {
@@ -71,7 +73,7 @@ const UpdateSecteurs = ({ isOpen, onClose, userData, onUserUpdated }) => {
 
       const updatedUser = {
         ...userData,
-        secteursActivites: selectedSecteurs,
+        secteursActivites: selectedSecteurs.map((name) => ({ name })),
       };
 
       onUserUpdated(updatedUser);
@@ -91,7 +93,7 @@ const UpdateSecteurs = ({ isOpen, onClose, userData, onUserUpdated }) => {
               key={secteur}
               control={
                 <Checkbox
-                  checked={Array.isArray(selectedSecteurs)}
+                  checked={selectedSecteurs.includes(secteur)}
                   onChange={() => handleToggle(secteur)}
                 />
               }

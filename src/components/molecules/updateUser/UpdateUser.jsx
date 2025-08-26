@@ -65,8 +65,6 @@ const UpdateUser = ({ isOpen, onClose, userData, onUserUpdated }) => {
   };
 
   return (
-    // <React.Fragment>
-    //   <FontAwesomeIcon icon={faPenToSquare} onClick={handleClickOpen} />
     <Dialog open={isOpen} onClose={onClose}>
       <form onSubmit={handleSubmit}>
         <DialogTitle>Modifier mes informations personnelles</DialogTitle>

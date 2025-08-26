@@ -1,12 +1,12 @@
 import { _get, _delete, _put } from "../config/axiosConfig.js";
 
 const SecteursTypesService = () => {
-  const addSecteurToUser = (userId, secteurId) => {
-    return _put(`/ttm/${userId}/secteur/${secteurId}`);
+  const addSecteurToUser = (userId, secteurName) => {
+    return _put(`/ttm/${userId}/secteur/${secteurName}`);
   };
 
-  const deleteSecteurFromUser = (userId, secteurId) => {
-    return _delete(`/ttm/${userId}/secteur/${secteurId}`);
+  const deleteSecteurFromUser = (userId, secteurName) => {
+    return _delete(`/ttm/${userId}/secteur/${secteurName}`);
   };
 
   const getUserSecteurs = (userId) => {
