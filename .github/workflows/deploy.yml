@@ -33,6 +33,10 @@ jobs:
         run: |
           podman build -t imagefrontttm .
 
+      - name: Create extern network docker
+        run: |
+          podman network create ttm_front || true
+
       - name: Deploy
         run: |
           podman-compose up -d
