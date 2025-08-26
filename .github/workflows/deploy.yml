@@ -10,4 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
+
+      - name: Install Podman
+        run: |
+          sudo apt update
+          sudo apt install -y podman
+          
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22'
+
+      - name: Install npm
+        run: nnpm install
+
+      - name: Build
+        run: npm run build
+
+      - name: Build image
+        run: |
+          podman build -t imagefrontttm .
+
+      - name: Deploy
+        run: |
+          podman-compose up -d
