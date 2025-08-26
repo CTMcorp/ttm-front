@@ -16,6 +16,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y podman
+          sudo apt install podman-compose
           
       - name: Setup Node
         uses: actions/setup-node@v3
