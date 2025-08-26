@@ -30,13 +30,10 @@ jobs:
         run: npm run build
 
       - name: Build image
-        run: |
-          podman build -t imagefrontttm .
+        run: podman build -t imagefrontttm .
 
       - name: Create extern network docker
-        run: |
-          podman network create ttm_front || true
+        run: podman network create ttm_front || true
 
       - name: Deploy
-        run: |
-          podman-compose up -d
+        run: podman-compose up -d
